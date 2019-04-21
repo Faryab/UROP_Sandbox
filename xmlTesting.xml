@@ -1,0 +1,86 @@
+=================================================================================
+Example of OpenMC info in a ParameterList XML format
+
+<?xml version='1.0' encoding='utf-8'?>
+<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
+<ParameterList name="geometry">
+    <ParameterList name="cell">
+        <Parameter name="id" type="string" value="1"/>
+        <Parameter name="material" type="string" value="1"/>
+        <Parameter name="name" type="string" value="fuel" />
+        <Parameter name="region" type="Array(int)" value="{-5,-4,3}" />
+        <Parameter name="universe" type="string" value="2"/>
+    </ParameterList>
+</ParameterList>
+
+
+==================================================================================
+Fortran Source Example
+
+TYPE(StringType) :: tmpStr
+INTEGER(SIK),ALLOCATABLE :: tmpI(:)
+TYPE(ParamType) :: openMCPL
+
+CALL openMCPL%initFromXML('some.xml') !Loads all data from file into memory
+
+CALL openMCPL%get('geometry->cell->id',tmpStr)
+!Value of tmpStr here is "1"
+
+CALL openMCPL%get('geometry->cell-region',tmpI)
+!Value of tmpI = (/-5,-4,3/)
+
+==================================================================================
+MPACT Parameter list for Pin Cell Geometry
+
+<?xml version='1.0' encoding='utf-8'?>
+<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
+<ParameterList name="GenPinMeshType">
+    <Parameter name="ID" type="int" value="1"/>
+    <Parameter name="NLevels" type="int" value="3"/>
+    <Parameter name="XPitch" type="float" value=""/>
+    <Parameter name="YPitch" type="float" value=""/>
+    <Parameter name="ZPitch" type="float" value=""/>
+    <Parameter name="Split" type="int" value="0"/>
+    <ParameterList name="Leve 1">
+        <Parameter name="nGeom" type="int" value="1"/>
+        <ParameterList name="Geom 1">
+            <ParameterList name="CircleGeom">
+                <Parameter name="Radius" type="float" value=""/>
+                <Parameter name="Centroid" type="float" value=""/>
+                <Parameter name="StartingAngle" type="float" value=""/>
+                <Parameter name="StoppingAngle" type="float" value=""/>
+                <ParameterList name="MeshParams">
+                    <Parameter name="nRad" type="int" value=""/>
+                </ParameterList>
+            </ParameterList>
+        </ParameterList>
+    </ParameterList>
+    <ParameterList name="Leve 2"> #TODO : Is this a type?
+        <Parameter name="nGeom" type="int" value="1"/>
+        <ParameterList name="Geom 1">
+            <ParameterList name="CircleGeom">
+                <Parameter name="Radius" type="float" value=""/>
+                <Parameter name="Centroid" type="float" value=""/>
+                <Parameter name="StartingAngle" type="float" value=""/>
+                <Parameter name="StoppingAngle" type="float" value=""/>
+                <ParameterList name="MeshParams">
+                    <Parameter name="nRad" type="int" value=""/>
+                </ParameterList>
+            </ParameterList>
+        </ParameterList>
+    </ParameterList>
+    <ParameterList name="Leve 3">
+        <Parameter name="nGeom" type="int" value="1"/>
+        <ParameterList name="Geom 1">
+            <ParameterList name="CircleGeom">
+                <Parameter name="Radius" type="float" value=""/>
+                <Parameter name="Centroid" type="float" value=""/>
+                <Parameter name="StartingAngle" type="float" value=""/>
+                <Parameter name="StoppingAngle" type="float" value=""/>
+                <ParameterList name="MeshParams">
+                    <Parameter name="nRad" type="int" value=""/>
+                </ParameterList>
+            </ParameterList>
+        </ParameterList>
+    </ParameterList>
+</ParameterList>

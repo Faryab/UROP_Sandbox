@@ -1,0 +1,55 @@
+name: UROPTesting2
+# Make sure to append FreeCAD's path to get it
+# to work with openmc.
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - ca-certificates=2018.11.29=ha4d7672_0
+  - certifi=2018.11.29=py36_1000
+  - cycler=0.10.0=py_1
+  - freetype=2.9.1=h5a5313f_1004
+  - h5py=2.8.0=py36h917ab60_1003
+  - hdf5=1.10.2=hc401514_3
+  - icu=58.2=h0a44026_1000
+  - kiwisolver=1.0.1=py36h04f5b5a_1002
+  - libcxx=7.0.0=h2d50403_2
+  - libffi=3.2.1=h0a44026_1005
+  - libiconv=1.15=h1de35cc_1004
+  - libpng=1.6.36=ha441bb4_1000
+  - libxml2=2.9.8=hf14e9c8_1005
+  - libxslt=1.1.32=h33a18ac_1002
+  - llvm-meta=7.0.0=0
+  - lxml=4.3.0=py36h7166777_1000
+  - matplotlib=3.0.2=py36_1001
+  - matplotlib-base=3.0.2=py36hf043ca5_1001
+  - mkl_fft=1.0.10=py36h470a237_1
+  - mkl_random=1.0.2=py36_0
+  - ncurses=6.1=h0a44026_1002
+  - openmc=0.10.0=py36hb8ecfd0_2
+  - openssl=1.0.2p=h1de35cc_1002
+  - pandas=0.24.0rc1=py36h0a44026_0
+  - pip=18.1=py36_1000
+  - pyparsing=2.3.1=py_0
+  - python=3.6.0=2
+  - python-dateutil=2.7.5=py_0
+  - pytz=2018.9=py_0
+  - setuptools=40.6.3=py36_0
+  - six=1.12.0=py36_1000
+  - sqlite=3.13.0=1
+  - tk=8.5.19=2
+  - tornado=5.1.1=py36h1de35cc_1000
+  - uncertainties=3.0.3=py36_1000
+  - wheel=0.32.3=py36_0
+  - xz=5.2.4=h1de35cc_1001
+  - zlib=1.2.11=h1de35cc_1004
+  - blas=1.0=mkl
+  - intel-openmp=2019.1=144
+  - libgfortran=3.0.1=h93005f0_2
+  - mkl=2019.1=144
+  - numpy=1.15.4=py36hacdab7b_0
+  - numpy-base=1.15.4=py36h6575580_0
+  - readline=6.2=2
+  - scipy=1.1.0=py36h1410ff5_2
+prefix: /Users/faryab/anaconda3/envs/UROPTesting2
+
