@@ -3,10 +3,20 @@ Script that takes in a FreeCAD ActiveDocument and outputs an OpenMC XML Geometry
 
 Basic Algorithm for the whole process:
 (1) Query all visible objects using the select_all_visible_objects() method in the FreeCADConsole
-(2) Pickle objects
-(3) Run CAD2MPACT.py
-    (1) Instantiate a Model Object and its parameters
-    (2)
+(3) Run script() from CAD2MPACT.py
+    ()
+
+Directions for FreeCAD console:
+(1) Define Geometry in FreeCAD
+(2) In the FreeCAD Python console add the following loc:
+    import sys
+    import os
+    sys.path.append(os.path.abspath("(path to CAD2MPACT.py <*>)"))
+    import CAD2MPACT as c2mp
+(3) vis_objs = c2mp.select_all_visible_objects()
+(4) script(vis_objs)
+
+    <*>  '/Users/faryab/Documents/UM Academics/UROP 2018-19/Sandbox' in my case
 """
 
 __title__ = "CAD2MPACT.py"
@@ -27,17 +37,11 @@ import FreeCAD #
 import FreeCADGui #
 import Part  #FreeCAD's Part Workbench #
 import math
-import pickle
 from FreeCAD import Base #
 from mpactgeometry import *  # Contains the class heirarchy for the geometry in python
-
-# Have to import FREECAD from a separate env into this one.
-# in order to have FREECAD actually work, make sure you have
-# Python  3.6.0 or 3.6.2 (3.6.7 DOES NOT work and results
-# in a seg fault) I have not tested it with 3.6.3-3.3.6 so far.
+from lxml import etree # xml library
 
 # Remark: If importing into FreeCAD console, no need to have imports marked with #
-
 
 ######################################################
 # --------------- FreeCAD SCRIPTING ---------------- #
@@ -82,18 +86,20 @@ def find_area__obj(obj):
     :param obj:
     :return: area
     """
-    area = 0
+    max_area = 0
     # compound object
     if has_outlist(obj):
         sub_objs = obj.OutList
 
         for sub_obj in sub_objs:
-            sub_obj_area = find_area__obj(sub_obj)
-            area = sub_obj_area if sub_obj_area > area else area
+            sub_obj_area, sub_obj = find_area__obj(sub_obj)
+            if sub_obj_area > max_area:
+                max_area = sub_obj_area
+                max_obj = sub_obj
     else:
-        area = find_area_elementary_obj(obj)
+        max_area, max_obj = find_area_elementary_obj(obj)
 
-    return area
+    return max_area, max_obj
 
 
 def find_area_elementary_obj(obj):
@@ -106,7 +112,7 @@ def find_area_elementary_obj(obj):
 
     if "Box" in obj.Name:
         bounds = obj.Shape.BoundBox
-        return bounds.XLength * bounds.YLength
+        return bounds.XLength * bounds.YLength, obj
     elif "Sphere" in obj.Name:
         print("Error at 'find_area_elementary_obj'. Object not supported for MPACT. ")
         raise NotImplementedError
@@ -116,7 +122,7 @@ def find_area_elementary_obj(obj):
         # Z-Cylinder
         if abs(bounds.XLength - bounds.YLength) <= 0.001 and abs(bounds.XLength - bounds.ZLength) > 0.001:
             area = math.pi * ((bounds.XLength/2)**2)
-            return area
+            return area, obj
         # Some other cylinder
         else:
             print("Error at 'find_area_elementary_obj'. Object not supported for MPACT. ")
@@ -137,18 +143,16 @@ def create_model(vis_objs):
     print("Running CAD2MPACT.py ...")
 
     # sort using python magic
-    areas = [find_area__obj(obj) for obj in vis_objs]
-    sorted_objs = [x for _, x in sorted(zip(areas, vis_objs), key=lambda pair: pair[0], reverse=True)]
+    areas_objs = [find_area__obj(obj) for obj in vis_objs]
+    areas_objs.sort(key=lambda tup: tup[0], reverse=True)
+    sorted_objs = [obj[1] for obj in areas_objs]
+
     boundary = sorted_objs[0] # 1st element in sorted objs is the biggest
     sorted_objs.pop(0) # remove bound box, since it's not a real level
     bounds = boundary.Shape.BoundBox
 
-    # Create Class Hierarchy using the sorted objects.
-    # TODO: Sorted object is a list of COMPOUND OBJS, need elmentary objects.
-    # can do something like for each obj -> make_elementary(obj)? ...
-
     levels = []
-
+    # Create Class Hierarchy using the sorted objects.
     for i in range(start=1, stop=len(sorted_objs)+1):
         lvl = Level(ngeom=1, name=i)
         if "Box" in sorted_objs[i].Name:
@@ -158,6 +162,9 @@ def create_model(vis_objs):
             stop_angle = sorted_objs[i].Angle
             centroid = (sorted_objs[i].Placement.Base[0], sorted_objs[i].Placement.Base[1])
             geom = CircleGeom(r=radius, startangl=0, stopangl=stop_angle, centroid=centroid, meshparams=MeshParams())
+        else:
+            print("Error at 'create_model(vis_objs)'. Object not supported for MPACT. ")
+            raise NotImplementedError
 
         lvl.add_geom(geom)
         levels.append(lvl)
@@ -170,7 +177,7 @@ def create_model(vis_objs):
     return Model
 
 
-def generateXML(model, filename):
+def generateXML(model, filename=None):
     """
     Takes in a MPACT Class Heirarchical Model and generates XML based on its hierarchy
     :param model:
@@ -178,6 +185,8 @@ def generateXML(model, filename):
     """
 
     # TODO:
+    # Use lxml
+
 
     raise NotImplementedError
 

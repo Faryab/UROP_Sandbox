@@ -39,13 +39,15 @@ class BoxGeom(Geom):
     Inherits from Geom. Defines a Box (quadrilateral) in MPACT.
     """
     # TODO: Ask Brendan about Squares again
-    def __init__(self, cornerpt=(0,0), vector1=None, vector2=None, extent=None):
+    def __init__(self, cornerpt=(0,0), vector1=None, vector2=None, extent=None, meshparams=None):
         Geom.__init__(self)
         self.Name = "BoxGeom"
         self.CornerPoint = cornerpt
         self.Vector1 = [1, 0] if vector1 is None else vector1
         self.Vector2 = [0, 1] if vector2 is None else vector2
         self.Extent = extent
+        self.MeshParams = meshparams
+        # TODO: Should Mesh Params be a list?
 
 
 class Level:
