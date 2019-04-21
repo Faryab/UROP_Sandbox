@@ -468,8 +468,15 @@ def main():
     :return:
     """
 
-    fp = open("/Users/faryab/anaconda3/envs/UROPTesting2/bin/shared.pkl")
-    vis_objs = pickle.load(fp)
+    # Pickling in FreeCAD Reference:
+    # - dump the vis_objs list from select_all_vis_objs() to some absolute path
+    # pickle.dump(vis_objs, open("/Users/faryab/anaconda3/envs/UROPTesting2/bin/shared.pkl","wb"))
+
+    # FIX: THIS DOES NOT WORK:( FREECAD Part::Feature OBJECTS CANNOT BE PICKLED
+    # Potential Fix: create __get_state__ and __set_state__ methods for Part::Feature objects
+
+    # unPickle
+    vis_objs = pickle.load(open("/Users/faryab/anaconda3/envs/UROPTesting2/bin/shared.pkl", "rb"))
 
     # DEVELOPMENT HALTED 3/4/19
     # Moving on to CAD2MPACT as it might be a faster way to develop the MPACT XML file

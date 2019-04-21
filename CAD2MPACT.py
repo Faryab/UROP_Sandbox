@@ -7,28 +7,6 @@ Basic Algorithm for the whole process:
 (3) Run CAD2MPACT.py
     (1) Instantiate a Model Object and its parameters
     (2)
-
-
-Instructions:
-(1) Define Geometry in FreeCAD
-(2) In the FreeCAD Python console add the following loc:
-    import sys
-    import os
-    sys.path.append(os.path.abspath("(path to CAD2MC.py)"))
-    import CAD2MC
-
-    *  '/Users/faryab/Documents/UM Academics/UROP 2018-19/Sandbox' in my case
-
-Debugging in FreeCAD console:
-    from importlib import reload
-    import CAD2MC
-    CAD2MC = reload(CAD2MC) # if you want to update in FreeCAD and debug through its interpreter
-
-    import pickle
-    vis_objs = CAD2MC.select_all_visible_objects()
-
-    fp = open("(path to THIS python interpreted)/shared.pkl", "w")
-    pickle.dump(vis_objs, fp)
 """
 
 __title__ = "CAD2MPACT.py"
@@ -192,23 +170,27 @@ def create_model(vis_objs):
     return Model
 
 
-def main():
+def generateXML(model, filename):
+    """
+    Takes in a MPACT Class Heirarchical Model and generates XML based on its hierarchy
+    :param model:
+    :return: saves 'filename.xml' file at a particular directory
+    """
+
+    # TODO:
+
+    raise NotImplementedError
+
+
+def script(vis_objs):
     """
     Main function that emulates the FreeCAD Console
 
     Currently used for debugging...
     :return:
     """
-
-    fp = open("/Users/faryab/anaconda3/envs/UROPTesting2/bin/shared.pkl")
-    vis_objs = pickle.load(fp)
-
     Model = create_model(vis_objs)
 
-    # TODO: Implement pickle loading then run create_model()
+    generateXML(Model)
 
     return
-
-
-if __name__ == '__main__':
-    main()
