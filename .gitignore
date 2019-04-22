@@ -1,6 +1,6 @@
 .DS_Store
 .ipynb_checkpoints
-*.png
+
 __pycache__
 *.pdf
 /Futility-master

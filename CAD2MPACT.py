@@ -14,7 +14,7 @@ Directions for FreeCAD console:
     sys.path.append(os.path.abspath("(path to CAD2MPACT.py <*>)"))
     import CAD2MPACT as c2mp
 (3) vis_objs = c2mp.select_all_visible_objects()
-(4) script(vis_objs)
+(4) c2mp.script(vis_objs)
 
     <*>  '/Users/faryab/Documents/UM Academics/UROP 2018-19/Sandbox' in my case
 """

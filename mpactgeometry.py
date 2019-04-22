@@ -6,7 +6,6 @@ class MeshParams:
     Parameters for a Mesh (for a Geometry)
     """
     def __init__(self, nrad=1):
-        # TODO: What should be the default value for this?
         self.nRad = nrad
 
 
@@ -31,14 +30,14 @@ class CircleGeom(Geom):
         self.StartAngle = startangl  # where the circle starts (anticlockwise) 0 = 1st quadrant +x-axis
         self.StopAngle = stopangl  # where the circle stops (anticlockwise) pi = 2nd quadrant -x axis
         self.MeshParams = meshparams
-        # TODO: Should Mesh Params be a list?
+        # TODO: Should Mesh Params be a list? Yes. There are different parameters (e.g. for box brendan will send)
 
 
 class BoxGeom(Geom):
     """
     Inherits from Geom. Defines a Box (quadrilateral) in MPACT.
     """
-    # TODO: Ask Brendan about Squares again
+    # TODO: Ask Brendan about Squares again done
     def __init__(self, cornerpt=(0,0), vector1=None, vector2=None, extent=None, meshparams=None):
         Geom.__init__(self)
         self.Name = "BoxGeom"
@@ -47,7 +46,7 @@ class BoxGeom(Geom):
         self.Vector2 = [0, 1] if vector2 is None else vector2
         self.Extent = extent
         self.MeshParams = meshparams
-        # TODO: Should Mesh Params be a list?
+        # TODO: Should Mesh Params be a list? done
 
 
 class Level:

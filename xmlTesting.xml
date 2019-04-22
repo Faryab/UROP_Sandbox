@@ -41,7 +41,7 @@ MPACT Parameter list for Pin Cell Geometry
     <Parameter name="YPitch" type="float" value=""/>
     <Parameter name="ZPitch" type="float" value=""/>
     <Parameter name="Split" type="int" value="0"/>
-    <ParameterList name="Leve 1">
+    <ParameterList name="Level 1">
         <Parameter name="nGeom" type="int" value="1"/>
         <ParameterList name="Geom 1">
             <ParameterList name="CircleGeom">
@@ -55,7 +55,7 @@ MPACT Parameter list for Pin Cell Geometry
             </ParameterList>
         </ParameterList>
     </ParameterList>
-    <ParameterList name="Leve 2"> #TODO : Is this a type?
+    <ParameterList name="Level 2">
         <Parameter name="nGeom" type="int" value="1"/>
         <ParameterList name="Geom 1">
             <ParameterList name="CircleGeom">
@@ -69,7 +69,7 @@ MPACT Parameter list for Pin Cell Geometry
             </ParameterList>
         </ParameterList>
     </ParameterList>
-    <ParameterList name="Leve 3">
+    <ParameterList name="Level 3">
         <Parameter name="nGeom" type="int" value="1"/>
         <ParameterList name="Geom 1">
             <ParameterList name="CircleGeom">
