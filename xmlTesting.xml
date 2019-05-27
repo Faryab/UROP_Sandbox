@@ -83,4 +83,38 @@ MPACT Parameter list for Pin Cell Geometry
             </ParameterList>
         </ParameterList>
     </ParameterList>
+    </ParameterList>
+
+
+==================================================================================
+Box Example provided by Brendan.
+
+- Extent is magnitude of each vector v1, v2
+- Corner point is where both vectors begin
+- Both vectors together make a 2D box (MPACT only has 2D geometries)
+
+- both vectors can also be specified as start/end points
+
+<?xml version='1.0' encoding='utf-8'>
+<ParameterList name="Geom 1">
+     <ParameterList name="BoxGeom">
+         <Parameter name="CornerPoint" type="Array(double)"
+value="{x0,y0}"/>
+         <Parameter name="Vector1" type="Array(double)" value="{ux1,uy1}"/>
+         <Parameter name="Vector2" type="Array(double)" value="{ux2,uy2}"/>
+         <Parameter name="Extent" type="Array(double)" value="{v1,v2}"/>
+         <ParameterList name="MeshParams">
+             <Parameter name="nx" type="" value="2"/>
+             <Parameter name="ny" type="" value="2"/>
+         </ParameterList>
+     </ParameterList>
+</ParameterList>
+<ParameterList name="Geom 2">
+     <ParameterList name="BoxGeom">
+         <Parameter name="StartPoint" type="Array(double)" value="{x1,y1}"/>
+         <Parameter name="EndPoint" type="Array(double)" value="{x2,y2}"/>
+             <Parameter name="nx" type="" value="2"/>
+             <Parameter name="ny" type="" value="2"/>
+         </ParameterList>
+     </ParameterList>
 </ParameterList>

@@ -4,7 +4,6 @@ Script that takes in a FreeCAD ActiveDocument and outputs an OpenMC XML Geometry
 Basic Algorithm for the whole process:
 (1) Query all visible objects using the select_all_visible_objects() method in the FreeCADConsole
 (3) Run script() from CAD2MPACT.py
-    ()
 
 Directions for FreeCAD console:
 (1) Define Geometry in FreeCAD
@@ -136,7 +135,7 @@ def create_model(vis_objs):
     """
     Main function of the create_model that runs (3) from the algorithm defined at the top.
 
-    Remark: We assume materials are predefined, since we are only interested in replicating grometry.
+    Remark: We assume materials are predefined, since we are only interested in replicating geometry.
     :return: exports to XML the OpenMC representaion of the geometry
     """
 
@@ -194,12 +193,9 @@ def generateXML(model, filename=None):
 def script(vis_objs):
     """
     Main function that emulates the FreeCAD Console
-
-    Currently used for debugging...
     :return:
     """
     Model = create_model(vis_objs)
-
     generateXML(Model)
 
     return
